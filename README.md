@@ -19,8 +19,8 @@ allprojects
   
 # Step 2. Add the dependency
   
-dependencies 
-{
-	compile 'com.github.manishkpr:manishkprpickersdk:1.0'
-}
+	dependencies 
+	{
+		compile 'com.github.manishkpr:manishkprpickersdk:1.0'
+	}
 
