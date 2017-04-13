@@ -18,13 +18,32 @@ android {
         }
     }
 }
+repositories {
+
+    maven { url "https://repo.commonsware.com.s3.amazonaws.com" }
+
+    maven {
+        url "https://s3.amazonaws.com/repo.commonsware.com"
+    }
+
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+}
 
 dependencies {
+    final PERMISSIONSDISPATCHER       =  "2.3.2";
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+
     testCompile 'junit:junit:4.12'
+
+    compile project(':manishkprpickersdkit')
+
+    compile "com.github.hotchemi:permissionsdispatcher:$PERMISSIONSDISPATCHER"
+    annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSIONSDISPATCHER"
 }

@@ -23,11 +23,25 @@ android {
     }
 }
 
+repositories {
+    maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
+}
+
+
 dependencies {
+
+    final SUPPORT                   =  "25.3.0";
+    final GLIDE                     =  "3.7.0";
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.0'
+
+    compile "com.android.support:appcompat-v7:$SUPPORT"
+    compile "com.android.support:design:$SUPPORT"
+
+    compile "com.github.bumptech.glide:glide:$GLIDE"
+    compile 'com.commonsware.cwac:camera:0.6.+'
     testCompile 'junit:junit:4.12'
 }

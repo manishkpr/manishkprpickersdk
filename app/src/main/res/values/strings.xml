@@ -1,3 +1,24 @@
+<!--
+  ~ Copyright (c) 2016. Ted Park. All Rights Reserved
+  -->
+
 <resources>
-    <string name="app_name">ManishKprPickerSdk</string>
+    <string name="app_name">TedPickerDemo</string>
+
+    <string name="custom_title">Custom Title</string>
+
+    <string name="back">Back</string>
+
+
+    <string name="permission_camera_rationale">Camera permission is needed to show the camera preview.</string>
+    <string name="permission_camera_denied">Camera permission was denied. Please consider granting it in order to access the camera!</string>
+
+    <string name="permission_storage_rationale">Storage permission is needed to show the Gallery preview.</string>
+    <string name="permission_storage_denied">Storage permission was denied. Please consider granting it in order to access the Gallery preview!</string>
+
+    <string name="permission_camera_never_askagain">Camera permission was denied with never ask again. Do you want to enable manually?</string>
+    <string name="permission_storage_never_askagain">Storage permission was denied with never ask again.Do you want to enable manually?</string>
+
+    <string name="button_allow">Allow</string>
+    <string name="button_deny">Deny</string>
 </resources>
