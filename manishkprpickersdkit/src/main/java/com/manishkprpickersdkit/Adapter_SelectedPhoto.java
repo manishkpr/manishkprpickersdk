@@ -77,6 +77,17 @@ public class Adapter_SelectedPhoto extends BaseRecyclerViewAdapter<Uri, Adapter_
             super(itemView);
             selected_photo = (ImageView) itemView.findViewById(R.id.selected_photo);
             iv_close = (ImageView) itemView.findViewById(R.id.iv_close);
+            if(ImagePickerActivity.getConfig()!=null) {
+                try {
+                    if(ImagePickerActivity.getConfig().getSelectedCloseImage()!=0) {
+                        iv_close.setBackgroundResource(ImagePickerActivity.getConfig().getSelectedCloseImage());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }else{
+                iv_close.setBackgroundResource(R.drawable.ic_clear);
+            }
             iv_close.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
