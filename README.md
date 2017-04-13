@@ -13,6 +13,8 @@ allprojects
 	repositories {
 		...
 		maven { url 'https://jitpack.io' }
+		maven { url "https://repo.commonsware.com.s3.amazonaws.com" }
+	        maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
 	}
 		
 }
@@ -23,8 +25,3 @@ allprojects
 		compile 'com.github.manishkpr:manishkprpickersdk:1.0'
 	}
 	
-	repositories {
-	    maven { url "https://repo.commonsware.com.s3.amazonaws.com" }
-	    maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
-	}
-
