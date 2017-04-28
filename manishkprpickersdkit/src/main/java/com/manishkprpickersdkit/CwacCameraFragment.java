@@ -28,6 +28,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -84,8 +85,7 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImagePickerActivity.mMyCameraHost = new MyCameraHost(getActivity());
-
+        ((ImagePickerActivity)getActivity()).setmMyCameraHost( new MyCameraHost(getActivity()));
 
         mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setMessage(getString(R.string.progress_title));

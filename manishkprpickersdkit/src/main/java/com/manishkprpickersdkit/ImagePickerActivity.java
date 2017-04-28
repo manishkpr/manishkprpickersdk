@@ -39,7 +39,7 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
      * Returns the parcelled image uris in the intent with this extra.
      */
     public static final String EXTRA_IMAGE_URIS = "image_uris";
-    public static CwacCameraFragment.MyCameraHost mMyCameraHost;
+    public  CwacCameraFragment.MyCameraHost mMyCameraHost;
     // initialize with default config.
     private static Config mConfig = new Config();
     /**
@@ -58,8 +58,15 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
     PagerAdapter_Picker adapter;
     Adapter_SelectedPhoto adapter_selectedPhoto;
 
+
+
     public static Config getConfig() {
         return mConfig;
+    }
+
+
+    public void setmMyCameraHost(CwacCameraFragment.MyCameraHost mMyCameraHost){
+        this.mMyCameraHost = mMyCameraHost;
     }
 
     public static void setConfig(Config config) {
