@@ -33,7 +33,7 @@ import java.util.List;
 public class GalleryFragment extends Fragment {
 
     public static ImageGalleryAdapter mGalleryAdapter;
-    public static ImagePickerActivity mActivity;
+    public  ImagePickerActivity mActivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

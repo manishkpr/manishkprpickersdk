@@ -31,6 +31,7 @@ repositories {
 
 dependencies {
     final PERMISSIONSDISPATCHER       =  "2.3.2";
+    final LEAK_CANARY               =  "1.5";
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -43,6 +44,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile project(':manishkprpickersdkit')
+
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$LEAK_CANARY"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$LEAK_CANARY"
 
     compile "com.github.hotchemi:permissionsdispatcher:$PERMISSIONSDISPATCHER"
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:$PERMISSIONSDISPATCHER"

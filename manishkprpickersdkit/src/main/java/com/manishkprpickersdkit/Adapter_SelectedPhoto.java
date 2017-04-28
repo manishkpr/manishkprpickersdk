@@ -47,7 +47,6 @@ public class Adapter_SelectedPhoto extends BaseRecyclerViewAdapter<Uri, Adapter_
 
 
 
-
         holder.iv_close.setTag(uri);
 
 
