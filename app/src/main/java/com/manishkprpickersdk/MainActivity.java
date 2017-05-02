@@ -72,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Config config = new Config();
+                String tabs[] = {"Gallery","Stock Floorplan"};
+                config.setTabs(tabs);
                 config.setCameraBtnImage(R.drawable.ic_camera_alt_sky_24dp);
                 config.setCameraHeight(R.dimen.app_camera_height);
                 config.setToolbarTitleRes(R.string.custom_title);

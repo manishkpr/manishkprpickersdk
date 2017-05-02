@@ -34,8 +34,18 @@ public class Config {
 
     private int savedDirectoryName = R.string.default_directory;
 
+    private String tabs[];
+
 
     private boolean flashOn = false;
+
+    public String[] getTabs() {
+        return tabs;
+    }
+
+    public void setTabs(String[] tabs) {
+        this.tabs = tabs;
+    }
 
     public int getCameraHeight() {
         return cameraHeight;

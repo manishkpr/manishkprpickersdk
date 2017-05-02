@@ -18,7 +18,7 @@ public class PagerAdapter_Picker extends FragmentPagerAdapter {
 
     public PagerAdapter_Picker(Context context, FragmentManager fm) {
         super(fm);
-            tab_titles = context.getResources().getStringArray(R.array.tab_titles);
+            tab_titles = (ImagePickerActivity.getConfig().getTabs()==null ? context.getResources().getStringArray(R.array.tab_titles) : ImagePickerActivity.getConfig().getTabs());
 
     }
 
@@ -36,19 +36,33 @@ public class PagerAdapter_Picker extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
 
-        switch (position) {
-            case 0:
-                CwacCameraFragment profileInfoFragment = new CwacCameraFragment();
-                CwacCameraFragment.setConfig(ImagePickerActivity.getConfig());
-                return profileInfoFragment;
+        if(ImagePickerActivity.getConfig().getTabs()==null) {
+
+            switch (position) {
+                case 0:
+                    CwacCameraFragment profileInfoFragment = new CwacCameraFragment();
+                    CwacCameraFragment.setConfig(ImagePickerActivity.getConfig());
+                    return profileInfoFragment;
 
 
-            case 1:
-                return new GalleryFragment();
+                case 1:
+                    return new GalleryFragment();
 
 
-            default:
-                return null;
+                default:
+                    return null;
+            }
+        }else{
+            switch (position) {
+
+
+                case 0:
+                    return new GalleryFragment();
+
+
+                default:
+                    return new CustomFragment();
+            }
         }
 
 
