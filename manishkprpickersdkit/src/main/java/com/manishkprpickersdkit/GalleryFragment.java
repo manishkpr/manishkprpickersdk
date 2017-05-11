@@ -5,7 +5,9 @@
 package com.manishkprpickersdkit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.manishkprpickersdkit.view.CustomSquareFrameLayout;
@@ -44,6 +47,7 @@ public class GalleryFragment extends Fragment {
 
 
         List<Uri> images = getImagesFromGallary(getActivity());
+        images.add(null);
         mGalleryAdapter = new ImageGalleryAdapter(getActivity(), images);
 
         galleryGridView.setAdapter(mGalleryAdapter);
@@ -51,29 +55,40 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                if (i != 0) {
+                    Uri mUri = mGalleryAdapter.getItem(i);
 
-                Uri mUri = mGalleryAdapter.getItem(i);
 
+                    if (!mActivity.containsImage(mUri)) {
+                        mActivity.addImage(mUri);
+                    } else {
+                        mActivity.removeImage(mUri);
 
-                if (!mActivity.containsImage(mUri)) {
-                    mActivity.addImage(mUri);
-                } else {
-                    mActivity.removeImage(mUri);
+                    }
 
+                    mGalleryAdapter.notifyDataSetChanged();
+                }else{
+                    Intent intent = new Intent(getActivity(),CameraActivity.class);
+                    startActivity(intent);
                 }
 
-                mGalleryAdapter.notifyDataSetChanged();
             }
         });
+
 
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshGallery(getActivity());
+    }
 
     public void refreshGallery(Context context) {
 
         List<Uri> images = getImagesFromGallary(context);
-
+        images.add(null);
         if (mGalleryAdapter == null) {
 
             mGalleryAdapter = new ImageGalleryAdapter(context, images);
@@ -93,7 +108,7 @@ public class GalleryFragment extends Fragment {
 
         List<Uri> images = new ArrayList<Uri>();
 
-
+        images.add(null);
         Cursor imageCursor = null;
         try {
             final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.ORIENTATION};
@@ -122,17 +137,24 @@ public class GalleryFragment extends Fragment {
 
 
     class ViewHolder {
-        CustomSquareFrameLayout root;
+        LinearLayout root;
 
         ImageView mThumbnail;
+
+        LinearLayout ll_selected_view,ll_camera;
+        CustomSquareFrameLayout ll_image_view;
 
         // This is like storing too much data in memory.
         // find a better way to handle this
         Uri uri;
 
         public ViewHolder(View view) {
-            root = (CustomSquareFrameLayout) view.findViewById(R.id.root);
+            root = (LinearLayout) view.findViewById(R.id.root);
             mThumbnail = (ImageView) view.findViewById(R.id.thumbnail_image);
+            ll_selected_view = (LinearLayout) view.findViewById(R.id.ll_selected_view);
+            ll_camera = (LinearLayout) view.findViewById(R.id.ll_camera);
+            ll_image_view = (CustomSquareFrameLayout) view.findViewById(R.id.ll_image_view);
+
         }
 
     }
@@ -161,31 +183,58 @@ public class GalleryFragment extends Fragment {
 
 
             final Uri mUri = getItem(position);
+
             boolean isSelected = mActivity.containsImage(mUri);
 
-
-            if(holder.root instanceof FrameLayout){
-                ((FrameLayout)holder.root).setForeground(isSelected ? ResourcesCompat.getDrawable(getResources(),R.drawable.gallery_photo_selected,null) : null);
+            if(isSelected){
+                holder.ll_selected_view.setVisibility(View.VISIBLE);
+            }else{
+                holder.ll_selected_view.setVisibility(View.GONE);
             }
+
+            /*if(position==0){
+                holder.ll_camera.setVisibility(View.VISIBLE);
+                holder.ll_image_view.setVisibility(View.GONE);
+            }else{
+                holder.ll_camera.setVisibility(View.GONE);
+                holder.ll_image_view.setVisibility(View.VISIBLE);
+            }*/
+
+            /*if(holder.root instanceof FrameLayout){
+                ((FrameLayout)holder.root).setForeground(isSelected ? ResourcesCompat.getDrawable(getResources(),R.drawable.btn_sky_checked_icon,null) : null);
+            }*/
 
 
 
             if (holder.uri == null || !holder.uri.equals(mUri)) {
 
+                if(mUri!=null) {
+                    Glide.with(context)
+                            .load(mUri.toString())
+                            .thumbnail(0.1f)
+                            //.fit()
+                            //   .override(holder.mThumbnail.getWidth(), holder.mThumbnail.getWidth())
+                            //  .override(holder.root.getWidth(), holder.root.getWidth())
+                            .centerCrop()
+                            .placeholder(R.drawable.place_holder_gallery)
+                            .error(R.drawable.no_image)
 
-                Glide.with(context)
-                        .load(mUri.toString())
-                        .thumbnail(0.1f)
-                                //.fit()
-                        .dontAnimate()
-                                //   .override(holder.mThumbnail.getWidth(), holder.mThumbnail.getWidth())
-                                //  .override(holder.root.getWidth(), holder.root.getWidth())
-                        .centerCrop()
-                        .placeholder(R.drawable.place_holder_gallery)
-                        .error(R.drawable.no_image)
+                            .into(holder.mThumbnail);
+                    holder.uri = mUri;
+                }else{
+                    Glide.with(context)
+                            .load("")
+                            .thumbnail(0.1f)
+                            //.fit()
+                            //   .override(holder.mThumbnail.getWidth(), holder.mThumbnail.getWidth())
+                            //  .override(holder.root.getWidth(), holder.root.getWidth())
+                            .centerCrop()
+                            .placeholder(new ColorDrawable(getActivity().getResources().getColor(R.color.custom_bg_grey)))
+                            .error(R.drawable.ic_camera_3x)
 
-                        .into(holder.mThumbnail);
-                holder.uri = mUri;
+                            .into(holder.mThumbnail);
+                    holder.uri = mUri;
+                }
 
 
             }

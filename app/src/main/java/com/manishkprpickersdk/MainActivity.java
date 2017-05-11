@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -74,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 Config config = new Config();
                 String tabs[] = {"Gallery","Stock Floorplan"};
                 config.setTabs(tabs);
+                config.setSecondMode(true);
                 config.setCameraBtnImage(R.drawable.ic_camera_alt_sky_24dp);
-                config.setCameraHeight(R.dimen.app_camera_height);
+                //config.setCameraHeight(R.dimen.app_camera_height);
                 config.setToolbarTitleRes(R.string.custom_title);
-                config.setSelectionMin(2);
+                config.setSelectionMin(0);
                 config.setSelectionLimit(4);
                 config.setSelectedCloseImage(R.drawable.ic_close_black_24dp);
                 config.setSelectedBottomHeight(R.dimen.bottom_height);

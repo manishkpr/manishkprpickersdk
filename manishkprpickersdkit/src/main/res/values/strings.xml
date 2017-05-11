@@ -32,5 +32,6 @@
 
 
     <string name="default_directory">Pictures</string>
+    <string name="reset">Reset</string>
 
 </resources>

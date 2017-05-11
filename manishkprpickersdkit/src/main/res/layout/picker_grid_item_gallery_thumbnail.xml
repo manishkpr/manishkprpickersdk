@@ -1,24 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.manishkprpickersdkit.view.CustomSquareFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
                                                     android:id="@+id/root"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
+                                                    android:layout_width="100dip"
+                                                    android:layout_height="100dip"
                                                     android:animateLayoutChanges="true"
-                                                    android:background="#cccccc"
+                                                    android:background="@color/custom_bg_grey"
 
 
 
     >
 
-    <com.manishkprpickersdkit.view.CustomSquareImageView
-        android:id="@+id/thumbnail_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <LinearLayout
         android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        />
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_camera"
+            android:gravity="center|center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:src="@drawable/ic_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <com.manishkprpickersdkit.view.CustomSquareFrameLayout
+            android:id="@+id/ll_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <com.manishkprpickersdkit.view.CustomSquareImageView
+                android:id="@+id/thumbnail_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+
+                />
+
+                <LinearLayout
+                    android:id="@+id/ll_selected_view"
+                    android:gravity="right"
+                    android:background="@drawable/gallery_photo_selected"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_margin="5dip"
+
+                        android:src="@drawable/ic_multiple_selection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+        </com.manishkprpickersdkit.view.CustomSquareFrameLayout>
+
+    </LinearLayout>
 
 
-</com.manishkprpickersdkit.view.CustomSquareFrameLayout>
+</LinearLayout>

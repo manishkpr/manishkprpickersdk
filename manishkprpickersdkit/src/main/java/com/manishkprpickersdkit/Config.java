@@ -34,6 +34,8 @@ public class Config {
 
     private int savedDirectoryName = R.string.default_directory;
 
+    private boolean isSecondMode = false;
+
     private String tabs[];
 
 
@@ -56,6 +58,14 @@ public class Config {
             throw new IllegalArgumentException("Invalid value for cameraHeight");
 
         this.cameraHeight = dimenRes;
+    }
+
+    public boolean isSecondMode() {
+        return isSecondMode;
+    }
+
+    public void setSecondMode(boolean secondMode) {
+        isSecondMode = secondMode;
     }
 
     public int getSavedDirectoryName() {

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016. Ted Park. All Rights Reserved
+ */
+
 package com.manishkprpickersdkit;
 
 import android.animation.Animator;
@@ -44,7 +48,6 @@ import com.manishkprpickersdkit.util.BitmapUtil;
 import com.manishkprpickersdkit.util.Util;
 import com.manishkprpickersdkit.view.DrawingView;
 
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -53,7 +56,7 @@ import java.util.Comparator;
 import java.util.List;
 
 
-public class CwacCameraFragment extends Fragment implements View.OnClickListener {
+public class CwacCameraActivity extends AppCompatActivity implements View.OnClickListener {
 
     static final int FOCUS_AREA_WEIGHT = 1000;
     private static final Interpolator ACCELERATE_INTERPOLATOR = new AccelerateInterpolator();
@@ -62,7 +65,7 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
     public static float camera_height;
 
     private static Config mConfig;
-    View view;
+
     ImageButton btn_take_picture;
     View vShutter;
     CameraView cameraView;
@@ -81,12 +84,16 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImagePickerActivity.imagePickerActivity.setmMyCameraHost( new MyCameraHost(getActivity()));
+        setContentView(R.layout.picker_fragment_camera_cwac);
+        MyCameraHost myCameraHost = new MyCameraHost(CwacCameraActivity.this);
+        //ImagePickerActivity.imagePickerActivity.setmMyCameraHost(myCameraHost);
 
-        mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage(getString(R.string.progress_title));
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setCancelable(false);
+
+        setupCamera();
 
     }
 
@@ -102,11 +109,7 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
         cameraView.onPause();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        view = inflater.inflate(R.layout.picker_fragment_camera_cwac, null, false);
-
+    void setupCamera(){
         initView();
 
 
@@ -151,14 +154,16 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
         addSensorListener();
 
 
-        return view;
     }
+
+
+
 
     int device_orientation;
 
     private void addSensorListener() {
 
-        SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        SensorManager sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
         sensorManager.registerListener(new SensorEventListener() {
 
 
@@ -167,6 +172,7 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
 
 
 /*
+
                 if (event.values[1]<6.5 && event.values[1]>-6.5) {
                     if (device_orientation!=1) {
                         Log.d("Sensor", "Landscape");
@@ -178,6 +184,8 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
                     }
                     device_orientation=0;
                 }
+
+
 */
 
                 float x = event.values[0];
@@ -211,18 +219,18 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
     }
 
     private void initView() {
-        cameraView = (CameraView) view.findViewById(R.id.cameraView);
+        cameraView = (CameraView) findViewById(R.id.cameraView);
 
-        btn_take_picture = (ImageButton) view.findViewById(R.id.btn_take_picture);
+        btn_take_picture = (ImageButton) findViewById(R.id.btn_take_picture);
         btn_take_picture.setOnClickListener(this);
         btn_take_picture.setImageResource(mConfig.getCameraBtnImage());
         btn_take_picture.setBackgroundResource(mConfig.getCameraBtnBackground());
 
 
-        vShutter = view.findViewById(R.id.vShutter);
+        vShutter = findViewById(R.id.vShutter);
 
 
-        drawingView = (DrawingView) view.findViewById(R.id.drawingView);
+        drawingView = (DrawingView) findViewById(R.id.drawingView);
 
     }
 
@@ -376,15 +384,15 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
 
     public void showTakenPicture(Uri uri) {
 
-        //ImagePickerActivity mImagePickerActivity = ((ImagePickerActivity) getActivity());
+
 
         ImagePickerActivity.imagePickerActivity.addImage(uri);
 
-        /*GalleryFragment mGalleryFragment = mImagePickerActivity.getGalleryFragment();
+        GalleryFragment mGalleryFragment = ImagePickerActivity.imagePickerActivity.getGalleryFragment();
 
         if (mGalleryFragment != null) {
-            mGalleryFragment.refreshGallery(mImagePickerActivity);
-        }*/
+            mGalleryFragment.refreshGallery(this);
+        }
 
 
         focusList = null;
@@ -446,7 +454,7 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
         // 미리보기 화면에서 사진 크기 해상도를 미리 가져온다
         @Override
         public Camera.Parameters adjustPreviewParameters(Camera.Parameters parameters) {
-            Log.d("gun0912","adjustPreviewParameters()");
+        Log.d("gun0912","adjustPreviewParameters()");
 
             bestPictureSize = getBestPictureSize(parameters);
             return super.adjustPreviewParameters(parameters);
@@ -507,7 +515,7 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
 
 
 
-            bitmap = Util.rotate(bitmap, device_orientation);
+                    bitmap = Util.rotate(bitmap, device_orientation);
 
 
 
@@ -574,7 +582,7 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
                 // 회전값을 보정한다
                 bitmap = Util.rotate(bitmap, device_orientation);
                 //bitmap = getCorrectOrientImage(bitmap, photo.toString());
-                // bitmap = getCorrectOrientImage(bitmap, photo.toString());
+               // bitmap = getCorrectOrientImage(bitmap, photo.toString());
 
                 float ratio = camera_height / camera_width;
 

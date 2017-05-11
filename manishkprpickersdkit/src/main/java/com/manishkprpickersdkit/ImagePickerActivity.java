@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
     TabLayout tabLayout;
     PagerAdapter_Picker adapter;
     Adapter_SelectedPhoto adapter_selectedPhoto;
-
+    public static ImagePickerActivity imagePickerActivity;
 
 
     public static Config getConfig() {
@@ -95,6 +96,7 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
 
         setupTabs();
         setSelectedPhotoRecyclerView();
+        imagePickerActivity = this;
 
     }
 
@@ -109,6 +111,8 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
         view_root = findViewById(R.id.view_root);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        LinearLayout  action_btn_contianer = (LinearLayout) findViewById(R.id.action_btn_contianer);
+
 
 
         tv_selected_title = (TextView) findViewById(R.id.tv_selected_title);
@@ -117,6 +121,11 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
         mSelectedImageEmptyMessage = (TextView) findViewById(R.id.selected_photos_empty);
 
         view_selected_photos_container = findViewById(R.id.view_selected_photos_container);
+        if(!getConfig().isSecondMode()){
+            action_btn_contianer.setVisibility(View.VISIBLE);
+        }else{
+            action_btn_contianer.setVisibility(View.GONE);
+        }
         view_selected_photos_container.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -280,10 +289,19 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
 
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            finish();
+            updatePicture();
             return true;
         } else if (id == R.id.action_done) {
             updatePicture();
+            return true;
+        }
+        else if (id == R.id.action_reset) {
+
+            mSelectedImages = new ArrayList<>();
+
+            GalleryFragment.mGalleryAdapter.notifyDataSetChanged();
+            adapter.notifyDataSetChanged();
+
             return true;
         }
 
@@ -307,5 +325,8 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        updatePicture();
+    }
 }
