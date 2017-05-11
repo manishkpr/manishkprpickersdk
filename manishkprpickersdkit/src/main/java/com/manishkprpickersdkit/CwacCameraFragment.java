@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -35,6 +36,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.commonsware.cwac.camera.CameraUtils;
 import com.commonsware.cwac.camera.CameraView;
@@ -391,7 +393,24 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
         btn_take_picture.setEnabled(true);
 
         if (mProgressDialog != null && mProgressDialog.isShowing())
+            mProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    if(CameraActivity.cameraActivity!=null){
+                        CameraActivity.cameraActivity.finish();
+                    }else{
+                        ImagePickerActivity mImagePickerActivity = ((ImagePickerActivity) getActivity());
+                        GalleryFragment mGalleryFragment = mImagePickerActivity.getGalleryFragment();
+
+                        if (mGalleryFragment != null) {
+                            mGalleryFragment.refreshGallery(mImagePickerActivity);
+                        }
+                    }
+                }
+            });
+
             mProgressDialog.dismiss();
+
 
 
     }

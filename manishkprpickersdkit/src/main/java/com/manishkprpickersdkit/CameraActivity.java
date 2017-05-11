@@ -7,31 +7,15 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.commonsware.cwac.camera.CameraHost;
 import com.commonsware.cwac.camera.CameraHostProvider;
-import com.flurgle.camerakit.CameraKit;
-import com.flurgle.camerakit.CameraListener;
-import com.flurgle.camerakit.CameraView;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 
 public class CameraActivity extends AppCompatActivity implements CameraHostProvider {
 
+    public static CameraActivity cameraActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +24,7 @@ public class CameraActivity extends AppCompatActivity implements CameraHostProvi
     }
 
     void initView(Bundle savedInstanceState){
+        cameraActivity = this;
         if (savedInstanceState == null) {
             CwacCameraFragment cwacCameraFragment = new CwacCameraFragment();
             CwacCameraFragment.setConfig(ImagePickerActivity.getConfig());
@@ -48,6 +33,12 @@ public class CameraActivity extends AppCompatActivity implements CameraHostProvi
                     .replace(R.id.root_view, cwacCameraFragment)
                     .commit();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cameraActivity = null;
     }
 
     @Override
