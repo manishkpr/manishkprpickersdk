@@ -230,7 +230,8 @@ public class GalleryFragment extends Fragment {
                             //  .override(holder.root.getWidth(), holder.root.getWidth())
                             .centerCrop()
                             .placeholder(new ColorDrawable(getActivity().getResources().getColor(R.color.custom_bg_grey)))
-                            .error(R.drawable.ic_camera_3x)
+                            .error(R.drawable.ic_take_photo
+                            )
 
                             .into(holder.mThumbnail);
                     holder.uri = mUri;

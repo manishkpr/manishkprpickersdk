@@ -36,6 +36,9 @@ public class Config {
 
     private boolean isSecondMode = false;
 
+
+    int tabPostition =0;
+
     private String tabs[];
 
 
@@ -43,6 +46,14 @@ public class Config {
 
     public String[] getTabs() {
         return tabs;
+    }
+
+    public int getTabPostition() {
+        return tabPostition;
+    }
+
+    public void setTabPostition(int tabPostition) {
+        this.tabPostition = tabPostition;
     }
 
     public void setTabs(String[] tabs) {

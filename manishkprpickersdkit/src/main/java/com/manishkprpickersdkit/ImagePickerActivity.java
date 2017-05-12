@@ -182,7 +182,9 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
         adapter = new PagerAdapter_Picker(this, getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(mViewPager);
-
+        if(mConfig!=null) {
+            mViewPager.setCurrentItem(mConfig.getTabPostition());
+        }
 
         if (mConfig.getTabBackgroundColor() > 0)
             tabLayout.setBackgroundColor(ContextCompat.getColor(this, mConfig.getTabBackgroundColor()));
