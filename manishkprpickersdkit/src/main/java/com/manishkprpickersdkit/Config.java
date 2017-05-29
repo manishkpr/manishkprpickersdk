@@ -37,6 +37,34 @@ public class Config {
     private boolean isSecondMode = false;
 
 
+    private String stockPhotos;
+    private String singlePhoto;
+    private String photoUrl;
+
+    public String getSinglePhoto() {
+        return singlePhoto;
+    }
+
+    public void setSinglePhoto(String singlePhoto) {
+        this.singlePhoto = singlePhoto;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public String getStockPhotos() {
+        return stockPhotos;
+    }
+
+    public void setStockPhotos(String stockPhotos) {
+        this.stockPhotos = stockPhotos;
+    }
+
     int tabPostition =0;
 
     private String tabs[];

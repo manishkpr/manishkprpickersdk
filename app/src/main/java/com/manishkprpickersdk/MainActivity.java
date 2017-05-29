@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,10 +72,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
+                String json  = "{\"images\":[{\"id\":215,\"image\":\"s3fs-public/projects/2054/medium/1.JPG\"},{\"id\":218,\"image\":\"s3fs-public/projects/2054/medium/2.JPG\"},{\"id\":221,\"image\":\"s3fs-public/projects/2054/medium/3.JPG\"}]}";
                 Config config = new Config();
                 String tabs[] = {"Gallery","Stock Floorplan"};
                 config.setTabs(tabs);
+                config.setPhotoUrl("https://s3-ap-southeast-1.amazonaws.com/www.theedgeproperty.com.sg/");
+                config.setStockPhotos(json);
+                //config.setSinglePhoto("https://s3-ap-southeast-1.amazonaws.com/www.theedgeproperty.com.sg/styles/floorplan_image_high/s3/externals/bc951d8b70f00068fb374e2166025aa5.jpg?itok=4eA3Pum5");
                 config.setTabPostition(1);
                 config.setSecondMode(true);
                 config.setCameraBtnImage(R.drawable.ic_camera_alt_sky_24dp);
@@ -122,12 +126,13 @@ public class MainActivity extends AppCompatActivity {
                 image_uris = intent.getParcelableArrayListExtra(ImagePickerActivity.EXTRA_IMAGE_URIS);
 
                 if (image_uris != null) {
+                    Log.e(getClass().getSimpleName(),""+image_uris.size());
                     showMedia();
                 }
 
-
             }
         }
+
     }
 
 
@@ -147,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
             View imageHolder = LayoutInflater.from(this).inflate(R.layout.image_item, null);
             ImageView thumbnail = (ImageView) imageHolder.findViewById(R.id.media_image);
-
+            Log.e(getClass().getSimpleName(),uri.toString());
             Glide.with(this)
                     .load(uri.toString())
                     .fitCenter()

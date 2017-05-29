@@ -38,6 +38,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
+
     compile 'com.flurgle:camerakit:0.9.17'
 
     compile "com.android.support:appcompat-v7:$SUPPORT"
