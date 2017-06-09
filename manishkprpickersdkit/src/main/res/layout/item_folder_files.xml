@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_main"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:padding="10dip"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:src="@drawable/no_image"
+            android:layout_width="80dip"
+            android:layout_height="80dip" />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="80dip">
+
+                <TextView
+                    android:textColor="#020328"
+                    android:padding="5dip"
+                    android:id="@+id/tv_title"
+                    android:textSize="14sp"
+                    android:lines="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#4b4b4b"
+                    android:padding="5dip"
+                    android:id="@+id/tv_total_images"
+                    android:textSize="14sp"
+                    android:lines="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_gravity="center|center"
+            android:src="@drawable/ic_keyboard_arrow_right_sky_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+    
+    <View
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:background="#d2d2d2"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"/>
+
+</LinearLayout>

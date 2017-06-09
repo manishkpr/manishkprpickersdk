@@ -74,10 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
                 String json  = "{\"images\":[{\"id\":215,\"image\":\"s3fs-public/projects/2054/medium/1.JPG\"},{\"id\":218,\"image\":\"s3fs-public/projects/2054/medium/2.JPG\"},{\"id\":221,\"image\":\"s3fs-public/projects/2054/medium/3.JPG\"}]}";
                 Config config = new Config();
-                String tabs[] = {"Gallery","Stock Floorplan"};
+                String tabs[] = {"Gallery"}; //,"Stock Floorplan"
                 config.setTabs(tabs);
                 config.setPhotoUrl("https://s3-ap-southeast-1.amazonaws.com/www.theedgeproperty.com.sg/");
                 config.setStockPhotos(json);
+                config.setDirectoryMode(true);
                 //config.setSinglePhoto("https://s3-ap-southeast-1.amazonaws.com/www.theedgeproperty.com.sg/styles/floorplan_image_high/s3/externals/bc951d8b70f00068fb374e2166025aa5.jpg?itok=4eA3Pum5");
                 config.setTabPostition(1);
                 config.setSecondMode(true);
@@ -97,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivityPermissionsDispatcher.showCameraWithCheck(MainActivity.this);
     }
+
+
 
     private void getImages(Config config) {
 

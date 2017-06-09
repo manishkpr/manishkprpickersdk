@@ -36,10 +36,21 @@ public class Config {
 
     private boolean isSecondMode = false;
 
+    private boolean isDirectoryMode = false;
+
+
 
     private String stockPhotos;
     private String singlePhoto;
     private String photoUrl;
+
+    public boolean isDirectoryMode() {
+        return isDirectoryMode;
+    }
+
+    public void setDirectoryMode(boolean directoryMode) {
+        isDirectoryMode = directoryMode;
+    }
 
     public String getSinglePhoto() {
         return singlePhoto;

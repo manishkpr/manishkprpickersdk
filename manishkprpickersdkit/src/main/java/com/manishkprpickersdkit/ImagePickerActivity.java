@@ -179,7 +179,7 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
     }
 
     private void setupTabs() {
-        adapter = new PagerAdapter_Picker(this, getSupportFragmentManager());
+        adapter = new PagerAdapter_Picker(this, getSupportFragmentManager(),tabLayout);
         mViewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(mViewPager);
         if(mConfig!=null) {
@@ -328,7 +328,8 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
     }
 
     @Override
-    public void onBackPressed() {
+    protected void onDestroy() {
+        super.onDestroy();
         updatePicture();
     }
 }

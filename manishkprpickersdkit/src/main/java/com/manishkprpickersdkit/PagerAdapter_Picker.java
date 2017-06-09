@@ -5,20 +5,29 @@
 package com.manishkprpickersdkit;
 
 import android.content.Context;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 
 
 public class PagerAdapter_Picker extends FragmentPagerAdapter {
 
 
     String[] tab_titles;
+    TabLayout tabLayout;
 
-
-    public PagerAdapter_Picker(Context context, FragmentManager fm) {
+    public PagerAdapter_Picker(Context context, FragmentManager fm,TabLayout tabLayout) {
         super(fm);
-            tab_titles = (ImagePickerActivity.getConfig().getTabs()==null ? context.getResources().getStringArray(R.array.tab_titles) : ImagePickerActivity.getConfig().getTabs());
+        this.tabLayout = tabLayout;
+        tab_titles = (ImagePickerActivity.getConfig().getTabs()==null ? context.getResources().getStringArray(R.array.tab_titles) : ImagePickerActivity.getConfig().getTabs());
+
+        if(tab_titles.length==1){
+            tabLayout.setVisibility(View.GONE);
+        }else{
+            tabLayout.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -53,17 +62,27 @@ public class PagerAdapter_Picker extends FragmentPagerAdapter {
                     return null;
             }
         }else{
-            switch (position) {
+
+            if(ImagePickerActivity.getConfig().getTabs().length ==2 ) {
+                switch (position) {
 
 
-                case 0:
-                    return new GalleryFragment();
+                    case 0:
+                        return new GalleryFragment();
 
 
-                default:
-                    return new CustomFragment();
+                    default:
+                        return new CustomFragment();
+                }
             }
+
         }
+
+        if(ImagePickerActivity.getConfig().isDirectoryMode()) {
+            return new ChildFragments();
+        }
+
+        return new GalleryFragment();
 
 
     }

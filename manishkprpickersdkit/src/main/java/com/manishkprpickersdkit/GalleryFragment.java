@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,8 @@ public class GalleryFragment extends Fragment {
 
     public static ImageGalleryAdapter mGalleryAdapter;
     public  ImagePickerActivity mActivity;
+    public static String folderName = "";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class GalleryFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.picker_fragment_gallery, container, false);
         GridView galleryGridView = (GridView) rootView.findViewById(R.id.gallery_grid);
         mActivity = ((ImagePickerActivity) getActivity());
+
+
 
 
         List<Uri> images = getImagesFromGallary(getActivity());
@@ -55,7 +61,7 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (i != 0) {
+
                     Uri mUri = mGalleryAdapter.getItem(i);
 
 
@@ -67,10 +73,7 @@ public class GalleryFragment extends Fragment {
                     }
 
                     mGalleryAdapter.notifyDataSetChanged();
-                }else{
-                    Intent intent = new Intent(getActivity(),CameraActivity.class);
-                    startActivity(intent);
-                }
+
 
             }
         });
@@ -108,15 +111,40 @@ public class GalleryFragment extends Fragment {
 
         List<Uri> images = new ArrayList<Uri>();
 
-        images.add(null);
+        //images.add(null);
         Cursor imageCursor = null;
         try {
-            final String[] columns = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.ORIENTATION};
+
+            final String[] columns = {
+
+                    MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.ORIENTATION,
+                    MediaStore.Images.Media._ID,
+                    MediaStore.Images.Media.BUCKET_ID,
+                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME
+
+            };
+
             final String orderBy = MediaStore.Images.Media.DATE_ADDED + " DESC";
 
 
-            imageCursor = context.getApplicationContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null, null, orderBy);
+            if(ImagePickerActivity.getConfig().isDirectoryMode()) {
+
+                imageCursor = context.getApplicationContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, MediaStore.Images.Media.DATA + " like ? ", new String[]{"%/"+folderName+"/%"}, orderBy);
+
+            }else {
+
+                imageCursor = context.getApplicationContext().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null, null, orderBy);
+            }
+
             while (imageCursor.moveToNext()) {
+
+                int columnIndex = imageCursor.getColumnIndex(MediaStore.Images.Media.BUCKET_ID);
+                Log.e(getClass().getSimpleName()," "+columnIndex);
+
+                columnIndex = imageCursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME);
+
+                Log.e(getClass().getSimpleName()," "+imageCursor.getString(columnIndex));
+
                 Uri uri = Uri.parse(imageCursor.getString(imageCursor.getColumnIndex(MediaStore.Images.Media.DATA)));
                 images.add(uri);
 
@@ -221,7 +249,10 @@ public class GalleryFragment extends Fragment {
 
                             .into(holder.mThumbnail);
                     holder.uri = mUri;
-                }else{
+                }
+
+
+                /*else{
                     Glide.with(context)
                             .load("")
                             .thumbnail(0.1f)
@@ -235,7 +266,7 @@ public class GalleryFragment extends Fragment {
 
                             .into(holder.mThumbnail);
                     holder.uri = mUri;
-                }
+                }*/
 
 
             }
@@ -243,5 +274,11 @@ public class GalleryFragment extends Fragment {
 
             return convertView;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        folderName = "";
     }
 }
