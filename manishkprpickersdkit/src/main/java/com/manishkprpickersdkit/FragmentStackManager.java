@@ -54,6 +54,8 @@ public class FragmentStackManager {
 
     }
 
+
+
     public void addChildFragment(FragmentManager manager, int id, Fragment fragment, boolean addToBackStack, String backStackTag){
         FragmentManager childFragMan = manager;
         ft2 = childFragMan.beginTransaction();
