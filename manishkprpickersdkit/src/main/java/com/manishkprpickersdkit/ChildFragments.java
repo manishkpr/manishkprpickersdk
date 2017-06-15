@@ -1,5 +1,6 @@
 package com.manishkprpickersdkit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -47,6 +48,7 @@ public class ChildFragments extends Fragment {
         //fragmentStackManager.addChildFragment(getChildFragmentManager(),R.id.root_view,fragment,backStack,getClass().getSimpleName().toString());
 
     }
+
 
 
 

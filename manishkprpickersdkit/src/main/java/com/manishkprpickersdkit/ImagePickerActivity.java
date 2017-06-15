@@ -291,7 +291,8 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
 
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            onBackPressed();
+            //onBackPressed();
+            updatePicture();
             return true;
         } else if (id == R.id.action_done) {
             updatePicture();
@@ -314,11 +315,12 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+        /*if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
         } else {
             updatePicture();
-        }
+        }*/
+        updatePicture();
     }
 
     public void updatePicture() {

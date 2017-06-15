@@ -79,8 +79,12 @@ public class GalleryFragment extends Fragment {
         });
 
 
+
+
         return rootView;
     }
+
+
 
     @Override
     public void onResume() {

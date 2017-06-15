@@ -5,10 +5,12 @@
 package com.manishkprpickersdkit;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +36,7 @@ import java.util.List;
 public class GalleryDirectoriesFragment extends Fragment {
 
     RecyclerView recyclerView;
+    FloatingActionButton fab_camera;
 
     List<FoldersAndFiles> data;
     @Override
@@ -41,7 +44,7 @@ public class GalleryDirectoriesFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_gallery_directories, container, false);
         recyclerView  = (RecyclerView) rootView.findViewById(R.id.recyclerView);
-
+        fab_camera    = (FloatingActionButton) rootView.findViewById(R.id.fab_camera);
 
 
         data = getDirectories();
@@ -49,8 +52,23 @@ public class GalleryDirectoriesFragment extends Fragment {
 
 
         initList();
+        setUpClick();
         return rootView;
 
+    }
+
+    void setUpClick(){
+        fab_camera.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCamera();
+            }
+        });
+    }
+
+    void openCamera(){
+        Intent intent = new Intent(getActivity(),CameraActivity.class);
+        startActivity(intent);
     }
 
     void initList(){
@@ -58,6 +76,7 @@ public class GalleryDirectoriesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(directoriesListAdapter);
     }
+
 
 
 

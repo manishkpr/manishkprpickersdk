@@ -60,4 +60,12 @@
         </LinearLayout>
     </HorizontalScrollView>
 
+    <Button
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Edit By Aviary"
+        android:textColor="#000000"/>
+
 </LinearLayout>

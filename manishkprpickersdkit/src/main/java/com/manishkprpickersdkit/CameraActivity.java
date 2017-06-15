@@ -39,6 +39,7 @@ public class CameraActivity extends AppCompatActivity implements CameraHostProvi
     protected void onDestroy() {
         super.onDestroy();
         cameraActivity = null;
+        ImagePickerActivity.imagePickerActivity.updatePicture();
     }
 
     @Override

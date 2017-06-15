@@ -21,9 +21,12 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.adobe.creativesdk.aviary.AdobeImageIntent;
 import com.bumptech.glide.Glide;
 import com.manishkprpickersdkit.Config;
 import com.manishkprpickersdkit.ImagePickerActivity;
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     ArrayList<Uri> image_uris = new ArrayList<Uri>();
     private ViewGroup mSelectedImagesContainer;
+    Button edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        edit = (Button) findViewById(R.id.edit);
         mSelectedImagesContainer = (ViewGroup) findViewById(R.id.selected_photos_container);
         View getImages = findViewById(R.id.get_images);
         getImages.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +97,20 @@ public class MainActivity extends AppCompatActivity {
 
 
                 getImages(config);
+            }
+        });
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri imageUri = image_uris.get(0); //Uri.parse("content://media/external/images/media/####");
+
+    /* 2) Create a new Intent */
+                Intent imageEditorIntent = new AdobeImageIntent.Builder(MainActivity.this)
+                        .setData(imageUri)
+                        .build();
+
+    /* 3) Start the Image Editor with request code 1 */
+                startActivityForResult(imageEditorIntent, 1);
             }
         });
 
