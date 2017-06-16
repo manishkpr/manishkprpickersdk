@@ -4,6 +4,7 @@
 
 package com.manishkprpickersdkit;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,9 +14,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.manishkprpickersdkit.view.CustomSquareFrameLayout;
@@ -79,9 +85,16 @@ public class GalleryFragment extends Fragment {
         });
 
 
-
+        setHasOptionsMenu(true);
 
         return rootView;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.menu_confirm, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
 
@@ -90,6 +103,7 @@ public class GalleryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         refreshGallery(getActivity());
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Cancel");
     }
 
     public void refreshGallery(Context context) {
@@ -279,6 +293,8 @@ public class GalleryFragment extends Fragment {
             return convertView;
         }
     }
+
+
 
     @Override
     public void onDestroy() {
