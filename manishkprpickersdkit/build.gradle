@@ -13,7 +13,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        manifestPlaceholders = [appPackageName: "com.manishkprpickersdk"]
+        manifestPlaceholders = [appPackageName: "sg.com.theedgeproperty.agent"]
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 
