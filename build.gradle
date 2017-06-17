@@ -7,7 +7,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath 'me.tatarka:gradle-retrolambda:3.3.0-beta4'
+
         //maven { url "https://jitpack.io" }
         //maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
         // NOTE: Do not place your application dependencies here; they belong
@@ -19,17 +19,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        /* 2) Add mavenCentral */
-        mavenCentral()
-
-        /* 3) Add the Creative SDK Maven repo URL */
-        maven {
-            url 'https://repo.adobe.com/nexus/content/repositories/releases/'
-        }
-        maven {
-            url 'http://maven.localytics.com/public'
-        }
-
     }
 }
 

@@ -2,15 +2,13 @@ package com.manishkprpickersdk;
 
 import android.app.Application;
 
-import com.adobe.creativesdk.foundation.AdobeCSDKFoundation;
-import com.adobe.creativesdk.foundation.auth.IAdobeAuthClientCredentials;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by edge on 28/4/17.
  */
 
-public class App extends Application implements IAdobeAuthClientCredentials{
+public class App extends Application {
 
     /* Be sure to fill in the two strings below. */
     private static final String CREATIVE_SDK_CLIENT_ID      = "0f174073830740b3b5d6ae522a37309a";
@@ -22,7 +20,7 @@ public class App extends Application implements IAdobeAuthClientCredentials{
     public void onCreate() {
         super.onCreate();
         initLeakCanary();
-        AdobeCSDKFoundation.initializeCSDKFoundation(getApplicationContext());
+
     }
 
     void initLeakCanary(){
@@ -34,23 +32,4 @@ public class App extends Application implements IAdobeAuthClientCredentials{
         LeakCanary.install(this);
     }
 
-    @Override
-    public String getClientID() {
-        return CREATIVE_SDK_CLIENT_ID;
-    }
-
-    @Override
-    public String getClientSecret() {
-        return CREATIVE_SDK_CLIENT_SECRET;
-    }
-
-    @Override
-    public String[] getAdditionalScopesList() {
-        return CREATIVE_SDK_SCOPES;
-    }
-
-    @Override
-    public String getRedirectURI() {
-        return CREATIVE_SDK_REDIRECT_URI;
-    }
 }

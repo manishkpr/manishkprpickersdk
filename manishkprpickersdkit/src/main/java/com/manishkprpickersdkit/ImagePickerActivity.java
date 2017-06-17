@@ -280,8 +280,8 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       // MenuInflater inflater = getMenuInflater();
-     //   inflater.inflate(R.menu.menu_confirm, menu);
+        //MenuInflater inflater = getMenuInflater();
+        //inflater.inflate(R.menu.menu_confirm, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
