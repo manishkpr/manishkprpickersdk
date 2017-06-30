@@ -10,7 +10,7 @@
     <item
         android:visible="true"
         android:id="@+id/action_done"
-        android:title="Save"
+        android:title="Confirm"
         app:showAsAction="always"/>
 
     <item
