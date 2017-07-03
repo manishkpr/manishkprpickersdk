@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 config.setDirectoryMode(true);
                 //config.setSinglePhoto("https://s3-ap-southeast-1.amazonaws.com/www.theedgeproperty.com.sg/styles/floorplan_image_high/s3/externals/bc951d8b70f00068fb374e2166025aa5.jpg?itok=4eA3Pum5");
                 config.setTabPostition(1);
+                config.setEnableFirstCoulmnCamera(true);
                 config.setSecondMode(true);
                 config.setCameraBtnImage(R.drawable.ic_camera_alt_sky_24dp);
                 //config.setCameraHeight(R.dimen.app_camera_height);

@@ -39,10 +39,20 @@ public class Config {
     private boolean isDirectoryMode = false;
 
 
+    private boolean enableFirstCoulmnCamera = false;
 
     private String stockPhotos;
     private String singlePhoto;
     private String photoUrl;
+
+
+    public boolean isEnableFirstCoulmnCamera() {
+        return enableFirstCoulmnCamera;
+    }
+
+    public void setEnableFirstCoulmnCamera(boolean enableFirstCoulmnCamera) {
+        this.enableFirstCoulmnCamera = enableFirstCoulmnCamera;
+    }
 
     public boolean isDirectoryMode() {
         return isDirectoryMode;
