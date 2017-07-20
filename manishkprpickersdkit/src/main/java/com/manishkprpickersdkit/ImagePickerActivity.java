@@ -331,12 +331,23 @@ public class ImagePickerActivity extends AppCompatActivity implements CameraHost
             return;
         }
 
+        //Util.toast(this,mSelectedImages.size()+"");
         Intent intent = new Intent();
         intent.putParcelableArrayListExtra(EXTRA_IMAGE_URIS, mSelectedImages);
         setResult(Activity.RESULT_OK, intent);
         finish();
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            //Toast.makeText(imagePickerActivity, "onActivityResult", Toast.LENGTH_SHORT).show();
+            updatePicture();
+        }
+    }
+
 
     @Override
     protected void onDestroy() {

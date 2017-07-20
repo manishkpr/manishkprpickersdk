@@ -7,9 +7,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="/Android-studio-apps/ManishKprPickerSdk" />
-            <option value="/Android-studio-apps/ManishKprPickerSdk/app" />
-            <option value="/Android-studio-apps/ManishKprPickerSdk/manishkprpickersdkit" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/manishkprpickersdkit" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

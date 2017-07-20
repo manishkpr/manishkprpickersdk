@@ -105,8 +105,8 @@ public class GalleryFragment extends Fragment {
     }
 
     void openCamera(){
-        Intent intent = new Intent(getActivity(),CameraActivity.class);
-        startActivity(intent);
+        Intent intent = new Intent(getActivity(), CameraActivity.class);
+        startActivityForResult(intent, CameraActivity.INTENT_CAMERA);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class GalleryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         refreshGallery(getActivity());
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Cancel");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Save");
     }
 
     public void refreshGallery(Context context) {

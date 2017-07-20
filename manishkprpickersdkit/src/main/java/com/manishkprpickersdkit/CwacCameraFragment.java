@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
@@ -25,6 +27,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -118,7 +121,6 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
         Log.d("ted","params.height: "+params.height);
         cameraView.setLayoutParams(params);
 
-
         // 카메라뷰의 크기와 위치를 가져온다
         // get CameraView's widht/height
         cameraView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -196,6 +198,8 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
                     device_orientation = 180;
                 else if (x>5 && y<5 && y>-5)
                     device_orientation = 270;
+
+                //Util.toast(getActivity(),"device_orientation "+device_orientation);
 
 
 
@@ -397,8 +401,10 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
                 @Override
                 public void onDismiss(DialogInterface dialog) {
                     if(CameraActivity.cameraActivity!=null){
-                        CameraActivity.cameraActivity.finish();
+                        CameraActivity.cameraActivity.closeCameraActivity();
+
                     }else{
+
                         ImagePickerActivity mImagePickerActivity = ((ImagePickerActivity) getActivity());
                         GalleryFragment mGalleryFragment = mImagePickerActivity.getGalleryFragment();
 
@@ -414,6 +420,8 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
 
 
     }
+
+
 
     @Override
     public void onStop() {
@@ -447,9 +455,6 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
 
         @Override
         protected File getPhotoDirectory() {
-
-
-
             return new File(Environment.getExternalStorageDirectory() + "/"+getResources().getString(mConfig.getSavedDirectoryName())+"/");
         }
 
@@ -591,8 +596,8 @@ public class CwacCameraFragment extends Fragment implements View.OnClickListener
 
 
                 // 회전값을 보정한다
-                bitmap = Util.rotate(bitmap, device_orientation);
-                //bitmap = getCorrectOrientImage(bitmap, photo.toString());
+                //bitmap = Util.rotate(bitmap, device_orientation);
+                bitmap = getCorrectOrientImage(bitmap, photo.toString());
                 // bitmap = getCorrectOrientImage(bitmap, photo.toString());
 
                 float ratio = camera_height / camera_width;

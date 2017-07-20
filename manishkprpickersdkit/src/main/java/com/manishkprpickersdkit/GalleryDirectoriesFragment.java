@@ -67,8 +67,9 @@ public class GalleryDirectoriesFragment extends Fragment {
     }
 
     void openCamera(){
-        Intent intent = new Intent(getActivity(),CameraActivity.class);
-        startActivity(intent);
+        Intent intent = new Intent(getActivity(), CameraActivity.class);
+        startActivityForResult(intent, CameraActivity.INTENT_CAMERA);
+
     }
 
     void initList(){

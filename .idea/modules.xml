@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///Android-studio-apps/ManishKprPickerSdk/ManishKprPickerSdk.iml" filepath="/Android-studio-apps/ManishKprPickerSdk/ManishKprPickerSdk.iml" />
-      <module fileurl="file:///Android-studio-apps/ManishKprPickerSdk/app/app.iml" filepath="/Android-studio-apps/ManishKprPickerSdk/app/app.iml" />
-      <module fileurl="file:///Android-studio-apps/ManishKprPickerSdk/manishkprpickersdkit/manishkprpickersdkit.iml" filepath="/Android-studio-apps/ManishKprPickerSdk/manishkprpickersdkit/manishkprpickersdkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/imagepicker.iml" filepath="$PROJECT_DIR$/imagepicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/manishkprpickersdkit/manishkprpickersdkit.iml" filepath="$PROJECT_DIR$/manishkprpickersdkit/manishkprpickersdkit.iml" />
     </modules>
   </component>
 </project>

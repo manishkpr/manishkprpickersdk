@@ -24,12 +24,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
 import com.manishkprpickersdkit.Config;
 import com.manishkprpickersdkit.ImagePickerActivity;
+import com.manishkprpickersdkit.util.Util;
 
 
 import java.util.ArrayList;
@@ -108,6 +109,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         MainActivityPermissionsDispatcher.showCameraWithCheck(MainActivity.this);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(IMAGES)) {
+            image_uris = savedInstanceState.getParcelableArrayList(IMAGES);
+        }
+    }
+
+    final String IMAGES = "images";
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i(" onSaveInstanceState.", ((savedInstanceState == null) ? "null" : "not null"));
+
+        savedInstanceState.putParcelableArrayList(IMAGES, image_uris);
+
     }
 
 
@@ -132,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
-
 
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == INTENT_REQUEST_GET_IMAGES) {

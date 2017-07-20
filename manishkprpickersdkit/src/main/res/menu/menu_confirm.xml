@@ -8,7 +8,7 @@
 
 
     <item
-        android:visible="true"
+        android:visible="false"
         android:id="@+id/action_done"
         android:title="Confirm"
         app:showAsAction="always"/>
